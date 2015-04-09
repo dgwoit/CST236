@@ -27,6 +27,6 @@ class TestGetQuadrilateralType(TestCase):
         result = get_quadrilateral_type(0, 1, 0, 1)
         self.assertEqual(result, 'invalid')
 
-    def test_get_quadrilateral_invalie_all_int(self):
+    def test_get_quadrilateral_invalid_all_int(self):
         result = get_quadrilateral_type(1, 2, 3, 4)
         self.assertEqual(result, 'invalid')
