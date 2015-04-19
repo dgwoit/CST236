@@ -1,34 +1,33 @@
-CST 236 Lab 1 Writeup
+CST 236 Lab 2 Writeup
 ---------------------
 
+1. Explain the major differences between TDD and BDD
 
-1. What was the hardest part of this lab?
-Installing and trying to understand the instructions for git.  Had I known Tortoisegit existed before-hand I would have
-installed that first since I'm not writing SVN scripts.  Also the lab instructions for git were a bit sparse in areas.
+In BDD the user story is converted to a normal language spec before TDD begins.  BDD also makes implementation easier to understand
 
-2. During the course of this lab, why did we exclude .pyc files?
-.pyc files are not text files and are generated from .py files, as such they are not a good candidate for storing in a
-repository.
+2. What is a mixin, what challenges can occur when testing them? What order are they initialized in
 
-3. Name three files which would likely need to have a gitignore added?
-Assuming by files we are talking about files and not files & folders I would say .pyc files, html files, and .exe files
-(listed automatically in the .gitignore, but there are no .exe files for this lab)
+Mixins are where a class has multiple inheritance.
+I suppose the challenge would be in testing all of the behaviors provided by the base classes in the child class.
+Per the Lab2.rst document Mixins are initialized in order.
 
-4. What is a pyunit TestCase?
-A pyunit TestCase is a class derived from TestCase containing zero to many function definitions for individually
-executing a test case each for a target piece of code/functionality.
+3. In python what does "super" do?
 
-5. What is the difference between a git cherry pick and a rebase?
-git cherry-pick allows the user to determine which changes are merged to base.  Rebase merges all changes to base.
+"Return a proxy object that delegates method calls to a parent or sibling class of type."  Super is used to access methods/attributes of a base class.
 
-6. How could you use git to print out just the author name of a given file for the current version of the repo?
+4. Was there any job stories that did not meet the criteria we discussed in class? How did you handle this case?
 
-.. code::
+As far as I can tell the Job stories appear to adhere to the Job Story format.
 
-    git log --max-count=1 --author <path>
+5. Which model did you find most challenging? Why?
 
-7. During this lab did you explore Tortoise Git or GIT Extensions? If not take a look at them, they probably would be useful for the remainder of the class
-No I did not explore Tortoise Git as I was unaware of its existence.
+Sadly I haven't made it to the BDD section of the lab yet as it seems I have lost a lot of time dealing with various issues.  This approach of using multiple new tools at once seems problematic.
 
-8. Did you find the second issue in get_triangle_type? Did you choose to test the code as is or fix the code in get_triangle_type
-I saw the error but left it alone as I did not see any instructions directing me to resolve the issue, nor were there any prior suggestions there may be a bug.
+6. Which model did you find easiest to update/maintain?
+
+I don't know yet, perhaps I'll get to find out when circumstances are more in my favor.
+
+7. How did you test that logging occurred only when desired?
+
+I based my testing on this example (http://stackoverflow.com/questions/9534245/python-logging-to-stringio-handler) where
+stream I/O is being used to capture the log data.  Setting/getting the logger by data and setting the log level are already part of the logger.

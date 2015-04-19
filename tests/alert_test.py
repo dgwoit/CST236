@@ -52,7 +52,7 @@ class TestAlerts(TestCase):
     def test_all_modules_log_module_a(self):
         self.log.setLevel(logging.DEBUG)
         self.stream.flush()
-        logging.getLogger('modules.a').log('a')
+        logging.getLogger('modules.a').info('a')
         self.handler_module_a.flush()
         print '[', self.stream.getvalue(), ']'
         self.assertTrue(self.stream.getvalue(), 'a')
@@ -65,7 +65,7 @@ class TestAlerts(TestCase):
 
     def test_all_modules_log_level_critical(self):
         logger = logging.getLogger('modules')
-        logging.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
         logging.getLogger('modules.a').critical('critical');
         print '[', self.stream.getvalue(), ']'
         self.assertTrue(self.stream.getvalue(), 'critical')
@@ -77,14 +77,17 @@ class TestAlerts(TestCase):
         logger.setLevel(logging.CRITICAL)
         logging.getLogger('modules.a').debug('debug');
         print '[', self.stream.getvalue(), ']'
-        self.assertTrue(self.stream.getvalue(), '')
+        value = self.stream.getvalue()
+        print len(value)
+        valueLength = len(value)
+        self.assertEquals(valueLength, 0)
 
     #from http://stackoverflow.com/questions/9534245/python-logging-to-stringio-handler
     def tearDown(self):
         self.log.removeHandler(self.handler)
         self.handler.close()
         self.log.removeHandler(self.handler_module_a)
-        self.handler_modules_a.close()
+        self.handler_module_a.close()
         self.log.removeHandler(self.handler_module_b)
-        self.handler_modules_b.close()
+        self.handler_module_b.close()
 

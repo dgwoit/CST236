@@ -5,6 +5,8 @@
 This module contains classes involved with interpreting and executing user commands
 """
 
+import logging
+
 """
 :class:'Command Handler'
 :purpose: Receives interpreted command requests from the command interpreter
@@ -17,6 +19,9 @@ class CommandHandler(object):
     :returns: none
     """
     def quit(self):
+        return
+
+    def displayCommands(self):
         return
 
 """
@@ -43,3 +48,7 @@ class CommandInterpreter:
     def invokeCommand(self, str_cmd):
         if(str_cmd == 'X'):
             self.handler.quit()
+        elif(str_cmd == '?'):
+            self.handler.displayCommands()
+        else:
+            logging.getLogger().warn('Bad command ' + str_cmd)
