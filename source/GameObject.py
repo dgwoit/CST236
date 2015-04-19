@@ -6,6 +6,7 @@ Provides definitions of objects that are in play
 """
 
 from source.Positionable import *
+from random import Random
 
 class IDFactory:
     def __init__(self):
@@ -53,6 +54,9 @@ class OrcType:
     white = 8
 
 class OrcFactory:
+    """
+    OrcFactory
+    """
     def __init__(self):
         self.identifier = 0
         self.orcs = {}
@@ -63,12 +67,36 @@ class OrcFactory:
         return orc
     def remove_orc(self, id):
         del self.orcs[id]
+    def get_orc(self, id):
+        return self.orcs[id]
+
     def terminate_orc(self, id):
         orc = self.orcs[id]
         self.remove_orc(id)
         orc.terminate()
 
 orcFactory = OrcFactory()
+
+class OrcGenerator:
+    """
+    OrcGenerator
+    """
+    def generate_orcs_randomly(self, num):
+        """
+        generate_orcs_randomly
+        :param num: Number of orcs to generate
+
+        :return: list of orcs
+        """
+
+        orcs = []
+        for x in range(0, num):
+            random = Random()
+            position = random.randint(-10,10)
+            orcs.append(orcFactory.spawn_orc(position))
+        return orcs
+
+
 
 class Orc(GameObject):
     def __init__(self, position, velocity=0, type=OrcType.red):

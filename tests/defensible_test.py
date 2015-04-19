@@ -6,6 +6,9 @@ from source.GameObject import *
 from unittest import TestCase
 
 class TestDefensible(TestCase, Defense):
+    """
+    TestDefensible
+    """
     def test_defense_orc_in_range(self):
         defense_perimeter = DefensePerimeter(0, 2)
         defense_perimeter.add_defense(self)

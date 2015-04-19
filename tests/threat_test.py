@@ -40,3 +40,14 @@ class TestThreat(TestCase):
         orc = orcFactory.spawn_orc(1)
         orc.priority = 13
         self.assertEqual(orc.priority, 13)
+
+    def test_get_by_id(self):
+        orc1 = orcFactory.spawn_orc(2)
+        id = orc1.id
+        orc2 = orcFactory.get_orc(id)
+        self.assertNotEqual(orc2, None)
+
+    def test_random_orcs(self):
+        generator = OrcGenerator()
+        orcs = generator.generate_orcs_randomly(10)
+        self.assertEqual(len(orcs), 10)

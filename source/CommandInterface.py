@@ -7,48 +7,59 @@ This module contains classes involved with interpreting and executing user comma
 
 import logging
 
-"""
-:class:'Command Handler'
-:purpose: Receives interpreted command requests from the command interpreter
-"""
 class CommandHandler(object):
     """
-    :function:'quit'
-    :purpose: receives the quit event. Overload to handle "quit" in your program
-    :arguments: none
-    :returns: none
+    Command Handler
     """
     def quit(self):
-        return
+        """
+        Quit program
+        :return: none
+        """
+        pass
 
-    def displayCommands(self):
-        return
+    def display_commands(self):
+        """
+        Display all commands
+        :return: none
+        """
+        pass
 
-"""
-:class: 'Command Interpreter'
-:purpose: Parses text input and issues commands based on input
-"""
+    def destroy_all_orcs(self):
+        """
+        Destroys all orcs in the game
+        :return: none
+        """
+        pass
+
+
 class CommandInterpreter:
     """
-    :function: __init__
-    :purpose: class initiator
-    :arguments:
-        :param handler: The CommandHandler instance to send commands to
-    :returns: none
+    Command Interpreter
     """
+
     def __init__(self, handler):
+        """
+        class initiator
+        :param handler: derived instance of handler to receive the commands
+        :type handler: CommandHandler
+        """
         self.handler = handler
 
-    """
-    :function: invokeCommand
-    :purpose: invokes commands based on text inpu
-    :arguments:
-        :param str_cmd: the string command to interpret
-    """
-    def invokeCommand(self, str_cmd):
+
+    def invoke_command(self, str_cmd):
+        """
+        Invokes Command
+        :param str_cmd: the string command to execute
+        :type str_cmd: string
+        :return: None
+        """
+
         if(str_cmd == 'X'):
             self.handler.quit()
         elif(str_cmd == '?'):
-            self.handler.displayCommands()
+            self.handler.display_commands()
+        elif(str_cmd == "ENTer the Trees"):
+            self.handler.destroy_all_orcs()
         else:
             logging.getLogger().warn('Bad command ' + str_cmd)
