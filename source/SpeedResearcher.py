@@ -11,6 +11,9 @@ class SpeedDatum:
         self.network_speed = int(tokens[3])
 
 class SpeedData:
+    def __init__(self):
+        self.data = []
+
     def read(self, stream):
         self.data = []
         for line in stream:
@@ -18,10 +21,39 @@ class SpeedData:
             record.read(line)
             self.data.append(record)
 
+    def write(self, stream):
+        for record in self.data:
+            line = record.start
+            line += '|'
+            line += record.end
+            line += '|'
+            line += str(record.distance)
+            line += '|'
+            line += str(record.network_speed)
+            line += '\n'
+            stream.write(line)
+
     def find_record(self, start, end):
         for record in self.data:
             if record.start == start and record.end == end:
                 return record
+
+    def add(self, start, end, distance, network_speed):
+        record = SpeedDatum()
+        record.start = start
+        record.end = end
+        record.distance = distance
+        record.network_speed = network_speed
+        self.data.append(record)
+
+
+class SpeedComputerPresets:
+
+    def set_ground_speeds(self, ground_speeds):
+        self._ground_speeds = ground_speeds
+
+    def get_ground_speed(self, key):
+        return self._ground_speeds[key]
 
 class SpeedComputer:
     def __init__(self):

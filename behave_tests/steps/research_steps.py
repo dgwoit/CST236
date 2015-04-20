@@ -71,3 +71,35 @@ def step_impl(context):
 @then('the speed difference is calculated')
 def step_impl(context):
     assert context.speed_computer.calculate_transport_time_difference() > 0
+
+@given('preset ground speeds')
+def step_impl(context):
+    preset_data = {"Porsche":1,"Bus":2,"Cement Truck":3,"laden swallow":4}
+    context.presets = SpeedComputerPresets()
+    context.presets.set_ground_speeds(preset_data)
+
+@when('a method of physical transport is selected')
+def step_impl(context):
+    context.value = context.presets.get_ground_speed("laden swallow")
+
+@then('there is a speed value')
+def step_impl(context):
+    assert context.value > 0
+
+@given('speed data')
+def step_impl(context):
+    context.speed_data = SpeedData()
+
+@when('a record is added')
+def step_impl(context):
+    context.speed_data.add('Denver, CO', 'Miami, FL', 3322, 5)
+
+@then('the number of records increased')
+def step_impl(context):
+    assert len(context.speed_data.data) > 0
+
+@then('it is streamed out')
+def step_impl(context):
+    stream = StringIO.StringIO()
+    context.speed_data.write(stream)
+    assert len(stream.getvalue()) > 0
