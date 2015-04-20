@@ -55,10 +55,20 @@ class SpeedComputerPresets:
     def get_ground_speed(self, key):
         return self._ground_speeds[key]
 
+    def set_start_city(self, city):
+        self._start_city = city
+
+    def get_start_city(self):
+        return self._start_city
+
+    start_city = property(get_start_city, set_start_city)
+
 class SpeedComputer:
     def __init__(self):
         self._drive_size = 1
         self._ground_speed = 0
+        self.network_latency = 0
+        self.hard_drive_speed = 0
 
     def set_drive_size(self, drive_size):
         self._drive_size = drive_size
@@ -76,8 +86,47 @@ class SpeedComputer:
 
     transport_speed = property(get_ground_speed, set_ground_speed)
 
+    network_latency = property
+    hard_drive_speed = property
+
     def calculate_drive_transport_time(self):
         return float(self.speed_datum.distance * self.drive_size) / float(self.ground_speed)
+
+    def calculate_drive_transport_time_from_route(self, route):
+        if len(route) <= 1:
+            return 0
+        start = route[0]
+        total = 0
+        if self.hard_drive_speed != 0:
+            total = float(self.drive_size) / float(self.hard_drive_speed)
+        print total
+        for city in route:
+            if city == start:
+                continue
+            end = city;
+            print start
+            print end
+            self.speed_datum = self.data.find_record(start, end)
+            total += self.calculate_drive_transport_time()
+            print total
+            start = end
+        return total
+
+    def calculate_network_transport_time_from_route(self, route):
+        if len(route) <= 1:
+            return 0
+        start = route[0]
+        total = self.network_latency
+        for city in route:
+            if city == start:
+                continue
+            end = city;
+            print start
+            print end
+            self.speed_datum = self.data.find_record(start, end)
+            total += self.calculate_network_transport_time()
+            start = end
+        return total
 
     def calculate_network_transport_time(self):
         return float(self.drive_size) / float(self.speed_datum.network_speed)

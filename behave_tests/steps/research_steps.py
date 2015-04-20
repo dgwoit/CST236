@@ -53,6 +53,8 @@ def step_impl(context):
 @given('a speed computer and speed data')
 def step_impl(context):
     context.string_data = "Portland, OR|Miami, FL|4353|12345\n"
+    context.string_data += "Denver, CO|Miami, FL|3322|5\n"
+    context.string_data += "Portland, OR|Denver, CO|1997|67890\n"
     stream = StringIO.StringIO(context.string_data)
     context.speed_data = SpeedData()
     context.speed_data.read(stream)
@@ -103,3 +105,54 @@ def step_impl(context):
     stream = StringIO.StringIO()
     context.speed_data.write(stream)
     assert len(stream.getvalue()) > 0
+
+@when('a drive size and a list of cities are set')
+def step_impl(context):
+    context.speed_computer.drive_size = 512
+    context.speed_computer.ground_speed = 100
+    context.route = ['Portland, OR', 'Denver, CO', 'Miami, FL']
+    context.speed_computer.data = context.speed_data
+
+@then('the drive speed is calculated from the route')
+def step_impl(context):
+    assert context.speed_computer.calculate_drive_transport_time_from_route(context.route)
+
+@given('presets')
+def step_impl(context):
+    context.presets = SpeedComputerPresets()
+
+@when('the start city is set')
+def step_impl(context):
+    context.presets.start_city = "Wilsonville, OR"
+
+@then('the start city has a value')
+def step_impl(context):
+    assert len(context.presets.start_city) > 0
+
+@when('a network latency is set')
+def step_impl(context):
+    context.speed_computer.drive_size = 512
+    context.route = ['Portland, OR', 'Denver, CO', 'Miami, FL']
+    context.speed_computer.data = context.speed_data
+    context.network_latency = 1
+
+@then('the network latency is in the calculation')
+def step_impl(context):
+    time_without_latency = context.speed_computer.calculate_network_transport_time_from_route(context.route)
+    context.speed_computer.network_latency = 1
+    time_with_latency = context.speed_computer.calculate_network_transport_time_from_route(context.route)
+    assert time_with_latency > time_without_latency
+
+@when('a hard drive speed is set')
+def step_impl(context):
+    context.speed_computer.drive_size = 512
+    context.speed_computer.ground_speed = 100
+    context.route = ['Portland, OR', 'Denver, CO', 'Miami, FL']
+    context.speed_computer.data = context.speed_data
+
+@then('the hard drive copy time is in the calculation')
+def step_impl(context):
+    time_without_hard_drive_speed = context.speed_computer.calculate_drive_transport_time_from_route(context.route)
+    context.speed_computer.hard_drive_speed = 25
+    time_with_hard_drive_speed = context.speed_computer.calculate_drive_transport_time_from_route(context.route)
+    assert time_with_hard_drive_speed > time_without_hard_drive_speed
