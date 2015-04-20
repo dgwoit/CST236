@@ -1,6 +1,6 @@
 __author__ = 'drock'
 
-from CommandInterface import *
+from source.CommandInterface import *
 from unittest import TestCase
 
 class TestCommandInterface(TestCase, CommandHandler):

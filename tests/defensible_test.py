@@ -1,7 +1,7 @@
 """
 Test for source.defensible
 """
-from source.Defensible import *
+from Defensible import *
 from source.GameObject import *
 from unittest import TestCase
 
