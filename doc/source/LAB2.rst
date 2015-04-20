@@ -12,9 +12,11 @@ Contents:
    :maxdepth: 2
 
    code/CommandInterface.rst
-   code/defensible.rst
+   code/Defensible.rst
    code/GameObject.rst
    code/Positionable.rst
+   code/SpeedResearcher.rst
+   code/Units.rst
 
 
 Indices and tables

@@ -14,6 +14,7 @@ class CommandHandler(object):
     def quit(self):
         """
         Quit program
+
         :return: none
         """
         pass
@@ -21,6 +22,7 @@ class CommandHandler(object):
     def display_commands(self):
         """
         Display all commands
+
         :return: none
         """
         pass
@@ -28,6 +30,7 @@ class CommandHandler(object):
     def destroy_all_orcs(self):
         """
         Destroys all orcs in the game
+
         :return: none
         """
         pass
@@ -41,6 +44,7 @@ class CommandInterpreter:
     def __init__(self, handler):
         """
         class initiator
+
         :param handler: derived instance of handler to receive the commands
         :type handler: CommandHandler
         """
@@ -50,8 +54,10 @@ class CommandInterpreter:
     def invoke_command(self, str_cmd):
         """
         Invokes Command
+
         :param str_cmd: the string command to execute
         :type str_cmd: string
+
         :return: None
         """
 
