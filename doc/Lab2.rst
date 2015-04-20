@@ -9,7 +9,7 @@ In BDD the user story is converted to a normal language spec before TDD begins. 
 
 Mixins are where a class has multiple inheritance.
 I suppose the challenge would be in testing all of the behaviors provided by the base classes in the child class.
-Per the Lab2.rst document Mixins are initialized in order.
+Per the Lab2.rst document Mixins are initialized in order.  Also the mixins don't seem to call __init__ which created a bit of a challenge.
 
 3. In python what does "super" do?
 
@@ -25,7 +25,7 @@ Sadly I haven't made it to the BDD section of the lab yet as it seems I have los
 
 6. Which model did you find easiest to update/maintain?
 
-I don't know yet, perhaps I'll get to find out when circumstances are more in my favor.
+It's a bit hard to say at this time, because by the time I got to BDD I had more experience working with the specified tools.  I think the BDD is probably harder to refactor.
 
 7. How did you test that logging occurred only when desired?
 
