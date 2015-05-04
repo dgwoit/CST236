@@ -1,138 +1,115 @@
-CST 236 Lab 3 Writeup
+CST 236 Lab 4 Writeup
 ---------------------
 
 
-1. What are five examples of other testing(nose2) plugins that might be useful?
+Stage 1 CC
+pyTona\answer_funcs.py
+    F 4:0 feet_to_miles - A
+    F 7:0 hal_20 - A
+pyTona\main.py
+    M 31:4 Interface.ask - C
+    C 11:0 Interface - A
+    M 61:4 Interface.teach - A
+    M 69:4 Interface.correct - A
+    M 12:4 Interface.__init__ - A
+    M 75:4 Interface.__add_answer - A
+pyTona\question_answer.py
+    C 2:0 QA - A
+    M 3:4 QA.__init__ - A
 
-* coverage - reports code coverage of tests
-* doctests - executes test/example code in docs
-* mp  - multiple processes, executes tests in
-* profiling - perform test executing profiling
-* testids - provides automatic generation of test ids
+Stage 1 MI
+pyTona\answer_funcs.py - A
+pyTona\main.py - A
+pyTona\question_answer.py - A
+pyTona\__init__.py - A
 
-2. Do you plan to create any of these plugins for your term project?
+Stage 2 CC
+pyTona\answer_funcs.py
+    F 68:0 get_fibonacci_seq - A
+    F 16:0 get_git_branch - A
+    F 27:0 get_git_url - A
+    F 38:0 get_other_users - A
+    M 63:4 FibSeqFinder.run - A
+    F 10:0 feet_to_miles - A
+    F 13:0 hal_20 - A
+    C 54:0 FibSeqFinder - A
+    M 55:4 FibSeqFinder.__init__ - A
+    M 60:4 FibSeqFinder.stop - A
+pyTona\main.py
+    M 34:4 Interface.ask - C
+    C 11:0 Interface - A
+    M 63:4 Interface.teach - A
+    M 71:4 Interface.correct - A
+    M 12:4 Interface.__init__ - A
+    M 77:4 Interface.__add_answer - A
+pyTona\question_answer.py
+    C 2:0 QA - A
+    M 3:4 QA.__init__ - A
 
-Not entirely sure I understand the phrasing of the question.  If you mean "do I plan to use" any of these plugins for my
- term project I don't know at this time, but the coverage one will get use.  Do I plan to create any plugins for the
- term project? I don't yet see a need to do so.
+Stage 2 MI
+pyTona\answer_funcs.py - A
+pyTona\main.py - A
+pyTona\question_answer.py - A
+pyTona\__init__.py - A
 
-3. What is the hardest part of this lab?
-It seems like it took a while to assemble all of the tests together.  It really drove me crazy writing the testing plugin
-because I missed the "always-on" setting for quite some time, which wasted loads of time.
+Stage 3 CC
 
-4. Did the code fully and completely implement the requirements? Explain
-No, the code did not fully implement the requirements.
-* The ASCII code for the question mark was incorrectly stated as '0x3E', so this needs to be rectified.
-* The distance conversion does not append miles to the result.
-* The time calculation 1) does not calcuate the time 2) appends "seconds" to the result (not stated the requirements).
-* The name of the inventor of Python is not reported to spec
-* The format of the value to enter in for the time calculations is not specified anywhere
+pyTona\answer_funcs.py
+    F 68:0 get_fibonacci_seq - A
+    F 16:0 get_git_branch - A
+    F 27:0 get_git_url - A
+    F 38:0 get_other_users - A
+    M 63:4 FibSeqFinder.run - A
+    F 10:0 feet_to_miles - A
+    F 13:0 hal_20 - A
+    C 54:0 FibSeqFinder - A
+    M 55:4 FibSeqFinder.__init__ - A
+    M 60:4 FibSeqFinder.stop - A
+pyTona\main.py
+    M 34:4 Interface.ask - C
+    C 11:0 Interface - A
+    M 63:4 Interface.teach - A
+    M 71:4 Interface.correct - A
+    M 12:4 Interface.__init__ - A
+    M 77:4 Interface.__add_answer - A
+pyTona\question_answer.py
+    C 2:0 QA - A
+    M 3:4 QA.__init__ - A
 
-5. Was the requirements complete? Explain
-The reporting of the time difference did not include to the time unit in the reported result, so this appears to be
-inconsistent.  The program also lists the possible inputs, however this is not listed as a requirement, so this
-discrepancy needs to be rectified as this could be an unrecorded requirement.
+Stage 3 MI
 
-For each bug you found in the source code enter a "Bug Request" in your write up following this template. You should consider bugs to be not following the requirements, inaccurate requirements, or code that has no reason for existing (not covered by the requirements):
-ISSUE Number:
+pyTona\answer_funcs.py - A
+pyTona\main.py - A
+pyTona\question_answer.py - A
+pyTona\__init__.py - A
 
-**ISSUE Number:**
+pyTona\answer_funcs.py - A
+pyTona\main.py - A
+pyTona\question_answer.py - A
+pyTona\__init__.py - A
 
-1
+1. What observations did you make while performing the analysis on the system?
 
-**BREIF:**
+Found several errors, one deleted requirement, need for additional requirements to achieve 100% code coverage.  Also
+found Mock important for achieving 100% coverage for requirements.
 
-Character 0x3e (>) is being used as a question mark instead of 0x3f (?)
+What are the advantages/disadvantages of performing this analysis
 
-**Steps to reproduce:**:
+This has proven to be very time consuming.  The details of getting Mock to work proved to be baffling because it would
+fail with no indication as to why.
 
-Enter a question that ends in '>' instead of '?'
+What are the advantages of data mutation? Did you use any of these tools?
 
-**Comments:**
+Data mutation helps identify tests that never fail or do not have a dependency on the code, in which case those tests
+fail to add value.
 
-This is a code defect and something that needs to be addressed in the requirements
+What did you use Mock for in this lab?
 
-**Time Spent:**
+I used Mock to override various library methods so the unit tests could control the outcome of calls made by the
+functions under test -- this way we have deterministic outcomes.
 
-**ISSUE Number:**
+How long did this lab take to complete?
 
-2
-
-**BREIF:**
-
-42 seconds always reported in time calculation
-
-**Steps to reproduce:**:
-
-For "How many seconds since <date time>" provide a value that would not result in 42
-
-**Comments:**
-
-Suspect hard-coded response
-
-**Time Spent:**
-
-**ISSUE Number:**
-
-3
-
-**BREIF:**
-
-"How many seconds since <date time>" report answer with "seconds" in response, however this is not specified anywhere.
-"seconds" either needs to be removed OR the corresponding requirement needs to be updated.
-
-**Steps to reproduce:**:
-Use the "How many seconds since <date time>" function
-
-**Comments:**
-
-**Time Spent:**
-
-**ISSUE Number:**
-
-4
-
-**BREIF:**
-
-The "What is <float> feet in miles" function does not contain "miles" in the result.
-
-**Steps to reproduce:**:
-
-Use the "What is <float> feet in miles", view the result
-
-**Comments:**
-
-Requirement specify "miles" follows the number
-
-**Time Spent:**
-
-**ISSUE Number:**
-
-5
-
-**BREIF:**
-
-Python inventor name incorrectly reported
-
-**Steps to reproduce:**:
-
-Use the "Who invented Python" function and observe the result.
-
-**Comments:**
-
-"Guido Rossum(Benevolent Dictator For Life)" is reported instead of "Guido Rossum(BFDL)"
-
-**Time Spent:**
-
-
-Why are requirements tracing so important?
-
-Requirements tracing is important because
-
-* it helps to verify each requirement has a test
-* it helps to verify each test is traceable to a requirement
-* it helps to keep automated tests maintainable and requirements ar subject to change
-
-How long did it take to complete this lab?
-
-It seems like I spent over eight hours on it, not really sure why it took that long, but it did.
+It seems like over 12 hours.  Itdentifying the information that successfully allowed Mocking the socket functions took
+forever, just lots and lots of failure.  Mock seems very functionally expansive, and probably could have used more
+concrete examples of usage.  Also it just seems like I'm fighting the tools and the code is running unexplainably slow.
