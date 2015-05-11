@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d9a62d6-5813-4315-8ed0-8ff95e27c55c" name="Default" comment="Updated lab writeup">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CST236.iml" afterPath="$PROJECT_DIR$/.idea/CST236.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/LabWriteup.rst" afterPath="$PROJECT_DIR$/doc/LabWriteup.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/PerformanceDecorator.py" afterPath="$PROJECT_DIR$/source/PerformanceDecorator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/ReqTracer.py" afterPath="$PROJECT_DIR$/source/ReqTracer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyTona/answer_funcs.py" afterPath="$PROJECT_DIR$/pyTona/answer_funcs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyTona/main.py" afterPath="$PROJECT_DIR$/pyTona/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nose2.cfg" afterPath="$PROJECT_DIR$/nose2.cfg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/plugins/performance_reporter.py" afterPath="$PROJECT_DIR$/tests/plugins/performance_reporter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyTonaRequirements.txt" afterPath="$PROJECT_DIR$/pyTonaRequirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/pytona_test.py" afterPath="$PROJECT_DIR$/tests/pytona_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reqTracer.report.txt" afterPath="$PROJECT_DIR$/reqTracer.report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/plugins/req_trace_reporter.py" afterPath="$PROJECT_DIR$/tests/plugins/req_trace_reporter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CST236.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -108,8 +95,8 @@
       <file leaf-file-name="LabWriteup.rst" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc/LabWriteup.rst">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6361868" vertical-offset="183" max-vertical-offset="1105">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.36381322" vertical-offset="0" max-vertical-offset="1037">
+              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -227,6 +214,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="CST236" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CST236" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CST236" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="doc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1131,8 +1132,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/LabWriteup.rst">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6361868" vertical-offset="183" max-vertical-offset="1105">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.36381322" vertical-offset="0" max-vertical-offset="1037">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
           <folding />
         </state>
       </provider>

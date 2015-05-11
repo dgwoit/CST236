@@ -1,10 +1,6 @@
 CST 236 Lab 5 Writeup
 ---------------------
 
-Bugs:
-* Stats for "One second" result from Fibonacci sequence not correct.
-Changing elif value > 1: to elif value >= 1: appears to resolve issue
-
 1. What was the hardest part of this lab?
 
 Debugging, in part because running things take such a long time.  Also I don't have the nose2 unit test running in a
@@ -13,7 +9,7 @@ debugger which is a huge disadvantage.
 2. What is the difference between performance testing and performance measurement?
 
 Performance testing is when you are measuring system performance against specified criteria.  Performance measurement is
- the act of measuring the system -- this action may be part of performance testing or just part of performance reporting.
+ the act of measuring the system - this action may be part of performance testing or just part of performance reporting.
 
 3. What new bugs did you encounter with the new code?
 
