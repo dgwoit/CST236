@@ -1,0 +1,7 @@
+test case, durationtest_fibonacci_performance (tests.pytona_test.TestPyTona), 45.3930695574
+test_answer_retrieve_time (tests.pytona_test.TestPyTona), 0.048092047506
+test_mandelbrot_performance (tests.pytona_test.TestPyTona), 0.00442650546546
+test_lorem_ipsum_performance (tests.pytona_test.TestPyTona), 5.80209843815
+test_e_performance (tests.pytona_test.TestPyTona), 0.00530681462004
+test_answer_store_time (tests.pytona_test.TestPyTona), 0.0051416966543
+test_pi_performance (tests.pytona_test.TestPyTona), 10.0222333261

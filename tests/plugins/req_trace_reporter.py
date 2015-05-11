@@ -1,5 +1,3 @@
-__author__ = 'drock'
-
 from source.ReqTracer import Requirements
 import logging
 from nose2.events import Plugin

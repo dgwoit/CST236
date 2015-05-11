@@ -1,12 +1,16 @@
 from pyTona.question_answer import QA
-from pyTona.answer_funcs import feet_to_miles, hal_20, get_git_branch, get_git_url, get_other_users, get_fibonacci_seq
+from pyTona.answer_funcs import feet_to_miles, hal_20, get_git_branch, get_git_url, get_other_users, get_fibonacci_seq,\
+    get_pi, get_e_value, get_mandelbrot_area, get_lorem_ipsum_word_count
 
 import difflib
+import logging
+
 NOT_A_QUESTION_RETURN = "Was that a question?"
 UNKNOWN_QUESTION = "I don't know, please provide the answer"
 NO_QUESTION = 'Please ask a question first'
 NO_TEACH = 'I don\'t know about that. I was taught differently'
 
+logger = logging.getLogger(__file__)
 
 class Interface(object):
     def __init__(self):
@@ -27,7 +31,11 @@ class Interface(object):
             'Where am I': QA('Where am I', get_git_branch),
             'Where are you': QA('Where are you', get_git_url),
             'Who else is here': QA('Who else is here', get_other_users),
-            'What is the digit of the Fibonacci sequence': QA('What is the digit of the Fibonacci sequence', get_fibonacci_seq)
+            'What is the digit of the Fibonacci sequence': QA('What is the digit of the Fibonacci sequence', get_fibonacci_seq),
+            'What is PI for samples': QA('What is PI for samples', get_pi),
+            'What is E to the calculation': QA('What is E to the calculation', get_e_value),
+            'What is Mandelbrot area for samples': QA('What is Mandelbrot area for samples', get_mandelbrot_area),
+            'How many words in Lorem Ipsum': QA('How many words in Lorem Ipsum', get_lorem_ipsum_word_count)
         }
         self.last_question = None
 
@@ -46,7 +54,7 @@ class Interface(object):
                     args.append(float(keyword))
                 except:
                     parsed_question += "{0} ".format(keyword)
-            parsed_question = parsed_question[0:-2]
+            parsed_question = parsed_question[0:-1]
             self.last_question = parsed_question
             for answer in self.question_answers.values():
                 if difflib.SequenceMatcher(a=answer.question, b=parsed_question).ratio() >= .90:
@@ -55,7 +63,8 @@ class Interface(object):
                     else:
                         try:
                             return answer.function(*args)
-                        except:
+                        except Exception as e:
+                            logger.error(e)
                             raise Exception("Too many extra parameters")
             else:
                 return UNKNOWN_QUESTION

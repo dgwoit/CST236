@@ -2,8 +2,9 @@ __author__ = 'drock'
 
 from unittest import TestCase
 from pyTona.main import Interface
-from pyTona.answer_funcs import FibSeqFinder
+from pyTona.answer_funcs import *
 from source.ReqTracer import *
+from source.PerformanceDecorator import performance
 from mock import Mock
 from mock import patch
 from socket import socket
@@ -14,6 +15,7 @@ import socket
 import math
 import threading
 import random
+import logging
 
 class TestPyTona(TestCase):
     WasThatAQuestion = "Was that a question?"
@@ -24,16 +26,21 @@ class TestPyTona(TestCase):
     TooManyExtraParameters = "Too many extra parameters"
 
     def setUp(self):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.pytona = Interface()
 
     def tearDown(self):
+        if None != seq_finder:
+            seq_finder.stop()
+            seq_finder.join()
+
         for t in threading.enumerate():
             if threading.current_thread() != t:
                 t.stop()
         pass
 
     def ask(self, statement):
-        print "Statement: " + statement
+        self.logger.info("Statement: " + statement)
         return self.pytona.ask(statement)
 
     def ask_question(self, statement):
@@ -164,12 +171,6 @@ class TestPyTona(TestCase):
         response = self.pytona.correct(answer)
         self.assertEqual(response, self.PleaseAskAQuestionFirst)
 
-    @requirements(['#0001', '#0002', '#0007', '#0008', '#0018'])
-    def test_question_epoch_now(self):
-        response = self.ask_question('How many seconds since ' + str(long(time.clock())))
-        answer = "0 seconds"
-        self.assertEqual(response, answer)
-
     @requirements(['#0001', '#0002', '#0007', '#0008', '#0019'])
     def test_question_inventor(self):
         response = self.ask_question('Who invented Python')
@@ -271,7 +272,7 @@ class TestPyTona(TestCase):
             mock().recv.return_value = 'chico$harpo$groucho$gummo$zeppo'
             self.equality_test("Who else is here", ["chico", "harpo", "groucho", "gummo", "zeppo"])
             mock().send.assert_called_once_with('Who?')
-            mock().connect.assert_called_once_with(('192.168.64.3','1337'))
+            mock().connect.assert_called_once_with(('192.168.64.3',1337))
 
     @requirements(['#0001', '#0002', '#0007', '#0008', '#0025', '#0026'])
     def test_question_users_trap(self):
@@ -288,16 +289,16 @@ class TestPyTona(TestCase):
     def test_question_fib_0(self):
         self.equality_test("What is the 0 digit of the Fibonacci sequence", self.Fib(0))
 
-    ### takes too long to execute!
-    # @requirements(['#0001', '#0002', '#0007', '#0008', '#0028'])
-    # def test_question_fib_101(self):
-    #     fib = FibSeqFinder()
-    #     fib.start()
-    #     while(len(fib.sequence) <= 10):
-    #         time.sleep(1.0)
-    #         continue
-    #     self.assertEqual(fib.sequence[5], self.Fib(5))
-    #     fib.join()
+    @requirements(['#0001', '#0002', '#0007', '#0008', '#0028'])
+    def test_question_fib_101(self):
+         fib = FibSeqFinder()
+         fib.start()
+         while(len(fib.sequence) <= 101):
+             time.sleep(1.0)
+             continue
+         self.assertEqual(fib.sequence[5], self.Fib(5))
+         fib.stop()
+         fib.join()
 
     """
     multinomial distribution
@@ -311,8 +312,8 @@ class TestPyTona(TestCase):
     def multinomial_test(self, num_trials, occurrences, p):
         mu = num_trials * p
         sigma = math.sqrt(num_trials * p * (1.0 - p))
-        self.assertLessEqual(occurrences, mu+2*sigma)
-        self.assertGreaterEqual(occurrences, mu-2*sigma)
+        self.assertTrue(occurrences <= mu+2*sigma)
+        self.assertTrue(occurrences >= mu-2*sigma)
 
     @requirements(['#0001', '#0002', '#0007', '#0008', '#0029'])
     def test_question_fib_n(self):
@@ -321,17 +322,18 @@ class TestPyTona(TestCase):
         one_second_count = 0
         cool_your_jets_count = 0
         self.randstate = 0
+        reset_seq_finder()
         def my_randint(self, min, max):
             val = self.randstate;
-            randstate = (self.randstate + 1) % 10
+            randstate = int((self.randstate + 1) % 10)
             return val
         with patch("random.random") as mock:
             mock().randint.side_effect = my_randint
-            for n in range(0, 10):
-                question = "What is the 10 digit of the Fibonacci sequence\x3f"
+            for n in range(0, 1000):
+                question = "What is the 1000 digit of the Fibonacci sequence\x3f"
                 result = self.pytona.ask(question)
 
-                if result is int:
+                if result is int or result is long:
                     continue
 
                 #accumulate stats for different outcomes
@@ -342,15 +344,154 @@ class TestPyTona(TestCase):
                     one_second_count += 1
                 elif result == "cool your jets":
                     cool_your_jets_count += 1
+                else:
+                    logger.info(result)
+                    pass
+            self.logger.info("thinking count: " + str(thinking_count))
+            self.logger.info("one second count: " + str(one_second_count))
+            self.logger.info("cool your jets count: " + str(cool_your_jets_count))
             self.multinomial_test(count, thinking_count, 0.60)
             self.multinomial_test(count, one_second_count, 0.30)
             self.multinomial_test(count, cool_your_jets_count, 0.10)
 
-    def test_open_threads(self):
-        start_threads = threading.enumerate()
-        self.ask_question("What is the 6 digit of the Fibonacci sequence")
-        end_threads = threading.enumerate()
-        for t in start_threads:
-            end_threads.remove(t)
+    @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0030'])
+    def test_qa_pair_capacity(self):
+        for n in range(1, 1000000):
+            self.pytona.ask("Why x%(x)x\x3f"%{"x", n})
+            self.pytona.teach(str(n))
+        for n in range(1, 1000000):
+            self.equality_test("Why x%"%{"x", n}, str(n))
 
-        self.assertFalse( len(end_threads) > 0 )
+    @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0031'])
+    @performance()
+    def test_answer_store_time(self):
+        question = "What is the answer"
+        answer = "42"
+        self.ask_question(question)
+        samples = 100
+        start_time = time.clock()
+        for n in range(1, samples):
+            self.pytona.teach(answer)
+        stop_time = time.clock()
+        response_time = (stop_time - start_time) / samples
+        self.assertTrue(response_time < 5)
+
+    @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0032'])
+    @performance()
+    def test_answer_retrieve_time(self):
+        question = "What is the answer\x3f"
+        answer = "42"
+        self.pytona.ask(question)
+        self.pytona.teach(answer)
+        samples = 100
+        start_time = time.clock()
+        for n in range(1, samples):
+            response = self.pytona.ask(question)
+            self.assertEqual(response, answer)
+        stop_time = time.clock()
+        response_time = (stop_time - start_time) / samples
+        self.assertTrue(response_time <= 5)
+
+    def ask_fib_question(self, n):
+        return self.ask_question("What is the {0} digit of the Fibonacci sequence".format(n))
+
+    @requirements(['#0033'])
+    def test_fibonacci_termination(self):
+        self.ask_fib_question(1001)
+        finder = get_seq_finder()
+        self.assertTrue(finder)
+        while finder.is_alive():
+            time.sleep(1)
+        self.assertTrue(finder.num_indexes == 1000)
+
+    @requirements(['#0034'])
+    @performance()
+    def test_fibonacci_performance(self):
+        start_time = time.clock()
+        finder = get_seq_finder()
+        self.test_fibonacci_termination()
+        end_time = time.clock()
+        duration = end_time - start_time
+        self.assertTrue(duration < 60)
+
+    @requirements(['#0035'])
+    def test_pi_calculation(self):
+        response = self.ask_question("What is PI for 1000 samples")
+        self.logger.info("pi estimate: " + str(response))
+        self.assertTrue(response > 0.9*math.pi)
+        self.assertTrue(response < 1.1*math.pi)
+
+    @requirements(['#0036'])
+    @performance()
+    def test_pi_performance(self):
+        start_time = time.clock()
+        response = self.ask_question("What is PI for 1000 samples")
+        logger.info(str(response))
+        end_time = time.clock()
+        duration = end_time - start_time
+        self.assertTrue(duration < 60)
+
+    @requirements(['#0037'])
+    def test_e_calculation(self):
+        question = "What is E to the 10 calculation"
+        self.ask_question(question)
+        response = self.ask_question(question)
+        n = 0
+        while response is not float and n < 60:
+            time.sleep(1)
+            response = self.ask_question(question)
+            self.logger.info(type(response))
+            self.logger.info(response)
+            n += 1
+        self.assertTrue(response > 0.9*math.e)
+        self.assertTrue(response < 1.1*math.e)
+
+    @requirements(['#0038'])
+    @performance()
+    def test_e_performance(self):
+        start_time = time.clock()
+        self.ask_question("What is E to the 10 calculation")
+        end_time = time.clock()
+        duration = end_time - start_time
+        self.assertTrue(duration < 60)
+
+    @requirements(['#0039'])
+    def test_mandelbrot_calculation(self):
+        question = "What is Mandelbrot area for 1000 samples"
+        response = self.ask_question(question)
+        self.logger.info(response)
+        sampler = get_mandelbrot_sampler()
+        sampler.join()
+        response = self.ask_question(question)
+        self.logger.info("response: " + str(response))
+        known_value = 1.5065918849
+        self.assertTrue(response > 0.7*known_value)
+        self.assertTrue(response < 1.4*known_value)
+
+    @requirements(['#0040'])
+    @performance()
+    def test_mandelbrot_performance(self):
+        start_time = time.clock()
+        self.test_mandelbrot_calculation()
+        stop_time = time.clock()
+        duration = stop_time - start_time
+        self.assertTrue(duration < 60)
+
+    @requirements(['#0041'])
+    def test_lorem_ipsum(self):
+        question = "How many words in Lorem Ipsum"
+        answer = 10611
+        self.equality_test(question, answer)
+
+    @requirements(['#0042'])
+    @performance()
+    def test_lorem_ipsum_performance(self):
+        start_time = time.clock()
+        for n in range(0,1000):
+            self.test_lorem_ipsum()
+        stop_time = time.clock()
+        duration = stop_time - start_time
+        self.assertTrue(duration)
+        assert(duration < 60)
+
+

@@ -8,6 +8,7 @@ class RequirementTrace(object):
 
 Requirements = {}
 
+
 def requirements(req_list):
     def wrapper(func):
         def add_req_and_call(*args, **kwargs):

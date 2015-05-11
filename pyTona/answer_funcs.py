@@ -4,14 +4,33 @@ import socket
 import subprocess
 import threading
 import time
+import logging
+import cmath
+import os
 
 seq_finder = None
+e_calculator = None
+mandelbrot_sampler = None
+logger = logging.getLogger()
+
+def get_seq_finder():
+    return seq_finder
+
+def reset_seq_finder():
+    global seq_finder
+    seq_finder = None
+
+def get_mandelbrot_sampler():
+    global mandelbrot_sampler
+    return mandelbrot_sampler
 
 def feet_to_miles(feet):
     return "{0} miles".format(float(feet) / 5280)
 
+
 def hal_20():
     return "I'm afraid I can't do that {0}".format(getpass.getuser())
+
 
 def get_git_branch():
     try:
@@ -24,6 +43,7 @@ def get_git_branch():
         return "Unknown"
     return output.strip()
 
+
 def get_git_url():
     try:
         process = subprocess.Popen(['git', 'config', '--get', 'remote.origin.url'], stdout=subprocess.PIPE)
@@ -35,10 +55,11 @@ def get_git_url():
         return "Unknown"
     return output.strip()
 
+
 def get_other_users():
     try:
         host = '192.168.64.3'
-        port = '1337'
+        port = 1337
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))
@@ -56,32 +77,194 @@ class FibSeqFinder(threading.Thread):
         super(FibSeqFinder, self).__init__(*args, **kwargs)
         self.sequence = [0, 1]
         self._stop = threading.Event()
+        self.num_indexes = 0
+        self.lock = threading.Lock()
 
     def stop(self):
         self._stop.set()
 
     def run(self):
-        while not self._stop.isSet():
-            self.sequence.append(self.sequence[-1] + self.sequence[-2])
-            time.sleep(1.00)
+        try:
+            self.num_indexes = 0
+            while not self._stop.isSet() and self.num_indexes < 1000:
+                if self.lock.acquire(True):
+                    self.sequence.append(self.sequence[-1] + self.sequence[-2])
+                    self.lock.release()
+                self.num_indexes += 1
+                time.sleep(.04)
+
+        except Exception as e:
+            logger.error(e.message)
+
+    def get_value(self, index):
+        value = None
+        if self.lock.acquire(True):
+            if index < len(self.sequence):
+                value = self.sequence[index]
+            self.lock.release()
+        return value
+
 
 def get_fibonacci_seq(index):
-    index = int(index)
-    global seq_finder
-    if seq_finder is None:
-        
-        seq_finder = FibSeqFinder()
-        seq_finder.start()
+    try:
+        index = int(index)
+        global seq_finder
+        if seq_finder is None:
+            seq_finder = FibSeqFinder()
+            seq_finder.start()
 
-    if index > len(seq_finder.sequence):
-        seq_finder.stop()
-        value = random.randint(0, 10)
-        if value > 6:
-            return "Thinking..."
-        elif value > 3:
-            return "One second"
+        if index > seq_finder.num_indexes:
+            value = random.randint(0, 9)
+            if value >= 4:
+                return "Thinking..."
+            elif value >= 1:
+                return "One second"
+            else:
+                return "cool your jets"
         else:
-            return "cool your jets"
-    else:
-        seq_finder.stop()
-        return seq_finder.sequence[index]
+            return seq_finder.sequence[index]
+    except Exception as e:
+        logging.error(e.message())
+        return "Error!"
+
+#calculate Monte Carlo approximation of PI
+class PiSampler(threading.Thread):
+    def __init__(self, num_samples, *args, **kwargs):
+        super(PiSampler, self).__init__(*args, **kwargs)
+        self.num_samples = num_samples
+        self.samples_inside = 0
+        self.sample_count = 0
+        self._stop = threading.Event()
+
+    def stop(self):
+        self._stop.set()
+
+    def run(self):
+        while self.sample_count < self.num_samples:
+            x = random.random()
+            y = random.random()
+            r_squared = x*x+y*y
+            if r_squared <= 1.0:
+                self.samples_inside += 1
+            self.sample_count += 1
+            time.sleep(.01)
+
+    def value(self):
+        if self.sample_count > 0:
+            return 4.0 * float(self.samples_inside) / float(self.sample_count)
+
+        return None
+
+
+def get_pi(num_samples):
+    num_samples = int(num_samples)
+    pi_sampler = PiSampler(num_samples)
+    pi_sampler.start()
+    pi_sampler.join()
+    return pi_sampler.value()
+
+
+class ECalculator(threading.Thread):
+    def __init__(self, *args, **kwargs):
+        super(ECalculator, self).__init__(*args, **kwargs)
+        self.sequence = []
+        self._stop = threading.Event()
+        self.num_indexes = 0
+        self.lock = threading.Lock()
+
+    def stop(self):
+        self._stop.set()
+
+    def run(self):
+        self.num_indexes = 0
+        while not self._stop.isSet() and self.num_indexes < 100:
+            n = self.num_indexes+1
+            value = (1+1/float(n))**n
+            self.sequence.append(value)
+            self.num_indexes += 1
+            time.sleep(.01)
+
+
+def get_e_value(index):
+    try:
+        index = int(index)
+        global e_calculator
+        if e_calculator is None:
+            e_calculator = ECalculator()
+            e_calculator.start()
+
+        if index > e_calculator.num_indexes:
+            value = random.randint(0, 9)
+            if value >= 4:
+                return "Thinking..."
+            elif value >= 1:
+                return "One second"
+            else:
+                return "cool your jets"
+        else:
+            return e_calculator.sequence[index]
+    except Exception as e:
+        return e.message
+
+#performs area calculation of Mandelbrot set using Monte Carlo sampling
+class MandelbrotSampler(threading.Thread):
+    def __init__(self, *args, **kwargs):
+        super(MandelbrotSampler, self).__init__(*args, **kwargs)
+        self.sequence = []
+        self._stop = threading.Event()
+        self.num_indexes = 0
+        self.samples_inside = 0
+
+    def stop(self):
+        self._stop.set()
+
+    def run(self):
+        self.num_indexes = 0
+        while not self._stop.isSet() and self.num_indexes < 1000:
+            r = random.uniform(-2, 1)
+            i = random.uniform(-1, 1)
+            z = complex(r, i)
+            if self.is_in_set(z):
+                self.samples_inside += 1
+            area = 6.0 * float(self.samples_inside) / float(self.num_indexes+1)
+            self.sequence.append(area)
+            self.num_indexes += 1
+            time.sleep(.01)
+
+    def is_in_set(self, z):
+        c = z
+        iterations = 0
+        while abs(z) < 4 and iterations < 1024:
+            z = z*z+c
+            iterations += 1
+        return iterations >= 16
+
+def get_mandelbrot_area(index):
+    try:
+        index = int(index)
+        global mandelbrot_sampler
+        if mandelbrot_sampler is None:
+            mandelbrot_sampler = MandelbrotSampler()
+            mandelbrot_sampler.start()
+
+        if index > mandelbrot_sampler.num_indexes:
+            value = random.randint(0, 9)
+            if value >= 4:
+                return "Thinking..."
+            elif value >= 1:
+                return "One second"
+            else:
+                return "cool your jets"
+        else:
+            return mandelbrot_sampler.sequence[index-1]
+    except Exception as e:
+        logger.error(e)
+        return "Error!"
+
+def get_lorem_ipsum_word_count():
+    try:
+        logger.info(os.getcwd())
+        with open('./pyTona/LoremIpsum.txt') as f:
+            return len(f.read().split())
+    except:
+        return "Lorem Ipsum not found"
