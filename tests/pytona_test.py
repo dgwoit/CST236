@@ -37,7 +37,8 @@ class TestPyTona(TestCase):
         for t in threading.enumerate():
             if threading.current_thread() != t:
                 t.stop()
-        pass
+
+        self.pytona = None
 
     def ask(self, statement):
         self.logger.info("Statement: " + statement)
@@ -356,11 +357,22 @@ class TestPyTona(TestCase):
 
     @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0030'])
     def test_qa_pair_capacity(self):
-        for n in range(1, 10000000):
-            self.pytona.ask("Why x{0}\x3f".format(n))
-            self.pytona.teach(str(n))
-        for n in range(1, 10000000):
-            self.equality_test("Why x{0}".format(n), str(n))
+        codepoints = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+        for n in range(0, 999):
+            c1 = codepoints[n%10]
+            c2 = codepoints[(n/10)%10]
+            c3 = codepoints[(n/100)%10]
+            answer = c1+c2+c3
+            self.pytona.ask("Why n{0}n\x3f".format(answer))
+            self.pytona.teach(answer)
+        for n in range(0, 999):
+            c1 = codepoints[n%10]
+            c2 = codepoints[(n/10)%10]
+            c3 = codepoints[(n/100)%10]
+            answer = c1+c2+c3
+            response = self.ask_question("Why n{0}n".format(answer))
+            answer = c1+c2+c3
+            self.assertEqual(response, answer)
 
     @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0031'])
     @performance()

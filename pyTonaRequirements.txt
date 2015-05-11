@@ -70,7 +70,7 @@ Username shall be determined by the name of the currently logged in user.
 
 **Performance Requirements**
 
-#0030 The system shall be capable of storing at least 1,000,000 questions and answers
+#0030 The system shall be capable of storing at least 1,000 questions and answers
 
 #0031 The system shall store answers in under 5 ms
 

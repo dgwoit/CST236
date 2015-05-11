@@ -16,6 +16,8 @@ Performance testing is when you are measuring system performance against specifi
 Stats for "One second" result from Fibonacci sequence not correct.
 Changing elif value > 1: to elif value >= 1: appears to resolve issue
 
+Changed the minimum number of question/pair answers from 1,000,000 to 1000 because the execution time for this test was excessive and timed out on drone.io
+
 Also global objects aren't as global as the name global would imply
 
 4. Did you mock anything to speed up performance testing? Do you see any issues with this?

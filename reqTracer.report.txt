@@ -1,6 +1,7 @@
 #0034
 	add_perf_info
 #0030
+	test_qa_pair_capacity
 #0033
 	test_fibonacci_termination
 	test_fibonacci_termination
@@ -47,6 +48,7 @@
 	test_git_branch_exception
 	test_git_branch_unknown
 	test_how_question
+	test_qa_pair_capacity
 	test_question_branch
 	test_question_fib_0
 	test_question_fib_101
@@ -79,6 +81,7 @@
 	test_git_branch_exception
 	test_git_branch_unknown
 	test_how_question
+	test_qa_pair_capacity
 	test_question_branch
 	test_question_fib_0
 	test_question_fib_101
@@ -131,6 +134,7 @@
 	add_perf_info
 	test_git_branch_exception
 	test_git_branch_unknown
+	test_qa_pair_capacity
 	test_question_branch
 	test_question_fib_0
 	test_question_fib_101
@@ -1162,6 +1166,7 @@
 #0015
 	add_perf_info
 	add_perf_info
+	test_qa_pair_capacity
 	test_question_match_numeric_3072
 	test_teaching_answer_correction
 #0014
@@ -1176,12 +1181,14 @@
 #0011
 	add_perf_info
 	add_perf_info
+	test_qa_pair_capacity
 	test_question_match_numeric_3072
 	test_teaching
 #0010
 	add_perf_info
 	add_perf_info
 	test_correcting_no_question
+	test_qa_pair_capacity
 	test_teaching
 	test_teaching_answer_correction
 	test_teaching_answer_teach
