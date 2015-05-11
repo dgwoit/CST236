@@ -356,11 +356,11 @@ class TestPyTona(TestCase):
 
     @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0030'])
     def test_qa_pair_capacity(self):
-        for n in range(1, 1000000):
-            self.pytona.ask("Why x%(x)x\x3f"%{"x", n})
+        for n in range(1, 10000000):
+            self.pytona.ask("Why x{0}\x3f".format(n))
             self.pytona.teach(str(n))
-        for n in range(1, 1000000):
-            self.equality_test("Why x%"%{"x", n}, str(n))
+        for n in range(1, 10000000):
+            self.equality_test("Why x{0}".format(n), str(n))
 
     @requirements(['#0001', '#0002', '#0008', '#0010', '#0011', '#0015', '#0031'])
     @performance()
