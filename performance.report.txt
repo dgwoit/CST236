@@ -1,0 +1,8 @@
+test case, duration
+test_fibonacci_performance, 41.014366223
+test_answer_retrieve_time, 0.0504219388017
+test_mandelbrot_performance, 0.00968532067685
+test_lorem_ipsum_performance, 5.19290962335
+test_e_performance, 0.00699111386947
+test_answer_store_time, 0.00498425859393
+test_pi_performance, 10.0150338948
