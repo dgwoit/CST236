@@ -1,34 +1,119 @@
-CST 236 Lab 1 Writeup
+CST 236 Lab 6 Writeup
 ---------------------
 
+Manual Tests
+************
 
-1. What was the hardest part of this lab?
-Installing and trying to understand the instructions for git.  Had I known Tortoisegit existed before-hand I would have
-installed that first since I'm not writing SVN scripts.  Also the lab instructions for git were a bit sparse in areas.
+**Startup Application State**
 
-2. During the course of this lab, why did we exclude .pyc files?
-.pyc files are not text files and are generated from .py files, as such they are not a good candidate for storing in a
-repository.
+*Setup*
 
-3. Name three files which would likely need to have a gitignore added?
-Assuming by files we are talking about files and not files & folders I would say .pyc files, html files, and .exe files
-(listed automatically in the .gitignore, but there are no .exe files for this lab)
+#. Sharp sharpTona.exe
 
-4. What is a pyunit TestCase?
-A pyunit TestCase is a class derived from TestCase containing zero to many function definitions for individually
-executing a test case each for a target piece of code/functionality.
+*Procedure*
 
-5. What is the difference between a git cherry pick and a rebase?
-git cherry-pick allows the user to determine which changes are merged to base.  Rebase merges all changes to base.
+#. Verify window title is "SharpTona"
+#. Verify the "Teach" button is disabled
+#. Verify the "Correct" button is disabled
 
-6. How could you use git to print out just the author name of a given file for the current version of the repo?
+**Edit Box Labels**
 
-.. code::
+*Setup*
 
-    git log --max-count=1 --author <path>
+#. Start sharpTona.exe
 
-7. During this lab did you explore Tortoise Git or GIT Extensions? If not take a look at them, they probably would be useful for the remainder of the class
-No I did not explore Tortoise Git as I was unaware of its existence.
+*Procedure*
 
-8. Did you find the second issue in get_triangle_type? Did you choose to test the code as is or fix the code in get_triangle_type
-I saw the error but left it alone as I did not see any instructions directing me to resolve the issue, nor were there any prior suggestions there may be a bug.
+#. Verify there is a "Question:" label
+#. Verify there is an "Answer:" label
+
+**Question Answer Response**
+
+*Setup*
+
+#. Start sharpTona.exe
+
+*Procedure*
+
+#. Enter the question "What is the answer to everything?" in the question box
+#. Verify the result in the answer box is "42"
+#. Verify the answer box is now enabled
+
+**Empty Question**
+
+*Setup*
+
+#. start sharpTona.exe
+
+*Procedure*
+
+#. Press the "Ask" button
+#. Verify the answer box contains "Was that a question?"
+
+**Correcting an Answer**
+
+*Setup*
+
+#. Start sharpTona.exe
+#. Either teach the system an answer to question or use a known question/answer pair
+
+*Procedure*
+
+#. Enter the question in the question box
+#. Press the "Ask" button
+#. Enter a different value in the answer box
+#. Press the "Correct" button
+#. Press the "Ask" button
+#. Verify the answer in the answer box is the one the tester changed
+
+**Unknown Question**
+
+*Setup*
+
+#. start sharpTona.exe
+
+*Procedure*
+
+#. Enter a question unknown to the system in the answer box
+#. Press the "Ask" button
+#. Verify the answer box contains "I don't know please teach me."
+#. Verify the "Teach" button is enabled
+#. Press the "Teach" button
+#. Verify the "Teach" button is disabled
+#. Verify the "Correct" button is disabled
+#. Verify the answer box is disabled
+#. Verify the stored answer can be retrieved when the question is asked again
+
+Analysis Questions
+******************
+
+1. What are the advantages and disadvantages of manual testing?
+
+The chief disadvantage of manual testing is it's manual nature.  Having people people perform repetitive testing can
+impair morale (I lost a tester this way).
+
+Manual testing provides an opportunity to perform exploratory testing where a tester can utilize their own intelligence
+to inquire about the proper/desired operation of a product.  Manual testing also allows the tester to observe product
+behavior and presentation that would not be caught by established automated testing
+
+2. What are the advantages and disadvantages of automated testing?
+
+Automated testing is excellent for determining whether the product is operating in repeatable fashion.  Automated testing
+can operate continuously, unlike people, and is useful for continuous integration testing.  Automated tests are limited by
+the boundaries of their coding, and for example, can be poor judges of product usability and appeal.
+
+3. What new bugs did you encounter with the new code?
+
+One of the control labels contained extra whitespace.  Aside from that there are other behaviors that may be inconsistent
+from prior labs and could be grounds for interacting with those responsible for authoring the user stories.
+
+4. How many UI tests did you generate? How did you determine you had written enough?
+
+There are nine tests total, however those tests perform multiple steps for setup and test for a variety of conditions
+along the way, so effectively we may have double that.  Test cases stopped being written when we had covered the requirements as we
+don't have the ability to view code coverage, or to review the code to look for other concepts in testing.
+
+5. How long did this lab take to accomplish?
+
+I think maybe 8 hours.  I think about three of those hours were due to behaviors relating to GetWindowText.  Also I
+don't think skipping lunch helped any.
