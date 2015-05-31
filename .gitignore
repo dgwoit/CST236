@@ -3,3 +3,5 @@ htmlcov
 .coverage
 **.pyc
 **.html
+.idea
+.idea/workspace.xml
