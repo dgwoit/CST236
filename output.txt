@@ -1,0 +1,27 @@
+package pyTona found
+module: getpass OK
+module: random OK
+module: socket OK
+module: subprocess OK
+module: threading OK
+module: time OK
+module: difflib OK
+create pyTona.main.QA succeed
+create pyTona.answer_funcs.FibSeqFinder succeed
+create pyTona.main.Interface succeed
+create pyTona.question_answer.QA succeed
+call pyTona.main.get_fibonacci_seq succeed
+call pyTona.answer_funcs.hal_20 succeed
+call pyTona.main.feet_to_miles succeed
+call pyTona.answer_funcs.get_git_url succeed
+call pyTona.main.get_git_branch succeed
+call pyTona.main.get_git_url succeed
+call pyTona.answer_funcs.get_other_users succeed
+call pyTona.answer_funcs.get_git_branch succeed
+call pyTona.main.get_other_users succeed
+call pyTona.answer_funcs.get_fibonacci_seq succeed
+call pyTona.main.hal_20 succeed
+call pyTona.answer_funcs.feet_to_miles succeed
+24 checks passed
+0 checks failed
+0 warnings
