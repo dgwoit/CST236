@@ -7,9 +7,12 @@ import re
 class TestGPSSimulator(TestCase):
     def setUp(self):
         self.simulator = GPSSimulator()
+        self.simulator.speed_over_ground = 5.0
+        self.track_angle_true = 45
 
     def tearDown(self):
         self.simulator = None
+
 
     gps_sentence = None
 
