@@ -25,6 +25,3 @@ class DeadReckoner(Thread):
         position = self.vessel.position.project(self.vessel.heading_true, distance)
         self.vessel.position = position
 
-    def set_target_position(self, position):
-        heading = vessel.position.bearing(position)
-        self.vessel.heading_true = heading

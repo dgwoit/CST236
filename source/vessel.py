@@ -23,8 +23,7 @@ class Vessel:
         self._follower.destination_arrived = self.destination_arrived
 
     def waypoint_activated(self, waypoint):
-        if self.navigator is not None:
-            self.navigator.set_target_position(waypoint.position)
+        pass
 
     def destination_arrived(self):
         self._follower = None

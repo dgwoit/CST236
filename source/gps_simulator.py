@@ -32,8 +32,7 @@ class GPSSimulator(threading.Thread):
         self.join()
 
     def emit_sentence(self, sentence):
-        if self.fn_send is not None:
-            self.fn_send(sentence)
+        pass
 
     def generate_rmc_sentence(self):
         print "generate_rmc_sentence"
