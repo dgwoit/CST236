@@ -1,5 +1,5 @@
 from latlon import LatLon
-from navigation_obect import NavigationObject
+from navigation_object import NavigationObject
 
 class Waypoint(NavigationObject):
     def __init__(self, id, name, position):

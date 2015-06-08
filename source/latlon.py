@@ -41,6 +41,8 @@ class LatLon:
         q = 0
         if abs(delta_psi) > 10e-12:
             q = delta_phi/delta_psi
+        else:
+            q = math.cos(phi1)
 
         dist = math.sqrt(delta_phi*delta_phi + q*q*delta_lambda*delta_lambda) * R
         return dist
