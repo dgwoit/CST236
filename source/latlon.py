@@ -76,6 +76,8 @@ class LatLon:
         q = 0
         if delta_psi > 10e-12:
             q = delta_phi / delta_psi
+        else:
+            q = math.cos(phi1)
         delta_lambda = delta*math.sin(theta)/q
 
         lambda2 = (lambda1+delta_lambda+math.pi) % (2*math.pi) - math.pi
