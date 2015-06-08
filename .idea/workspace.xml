@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e75e6c7-8966-4541-b5d9-14e8f14edf1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/dead_reckoner.py" afterPath="$PROJECT_DIR$/source/dead_reckoner.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/gps_simulator.py" afterPath="$PROJECT_DIR$/source/gps_simulator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/latlon.py" afterPath="$PROJECT_DIR$/source/latlon.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/navdata.json" afterPath="$PROJECT_DIR$/navdata.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/vessel.py" afterPath="$PROJECT_DIR$/source/vessel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/navigation_object_manager.py" afterPath="$PROJECT_DIR$/source/navigation_object_manager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CST236.iws" />
@@ -43,9 +44,21 @@
       <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="navigation_object_manager.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/navigation_object_manager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.37087378" vertical-offset="608" max-vertical-offset="1445">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,35 +85,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gps_sim_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/gps_sim_test.py">
+      <file leaf-file-name="latlon.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/latlon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.586206" vertical-offset="184" max-vertical-offset="1122">
-              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1564">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="route_follower_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/route_follower_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1020">
-              <caret line="43" column="23" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gps_simulator.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gps_simulator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/gps_simulator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23106796" vertical-offset="459" max-vertical-offset="1496">
-              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="879" max-vertical-offset="1394">
+              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -159,11 +158,9 @@
         <option value="$PROJECT_DIR$/tests/dead_reckoning_test.py" />
         <option value="$PROJECT_DIR$/tests/test_nav_object_manager.py" />
         <option value="$PROJECT_DIR$/source/navigation_obect.py" />
-        <option value="$PROJECT_DIR$/source/latlon.py" />
         <option value="$PROJECT_DIR$/source/track.py" />
         <option value="$PROJECT_DIR$/source/waypoint.py" />
         <option value="$PROJECT_DIR$/source/route.py" />
-        <option value="$PROJECT_DIR$/source/navigation_object_manager.py" />
         <option value="$PROJECT_DIR$/tests/nav_object_manager_test.py" />
         <option value="$PROJECT_DIR$/tests/test_settings.py" />
         <option value="$PROJECT_DIR$/tests/settings_test.py" />
@@ -174,10 +171,12 @@
         <option value="$PROJECT_DIR$/source/route_follower.py" />
         <option value="$PROJECT_DIR$/tests/route_test.py" />
         <option value="$PROJECT_DIR$/tests/waypoint_test.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/source/vessel.py" />
         <option value="$PROJECT_DIR$/source/dead_reckoner.py" />
         <option value="$PROJECT_DIR$/source/gps_simulator.py" />
+        <option value="$PROJECT_DIR$/source/latlon.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/source/navigation_object_manager.py" />
       </list>
     </option>
   </component>
@@ -709,14 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/latlon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1447" max-vertical-offset="2244">
-          <caret line="122" column="16" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/dead_reckoning_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
@@ -759,16 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/navigation_object_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="716" max-vertical-offset="1496">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -857,14 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/vessel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="578">
@@ -885,10 +858,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/gps_simulator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23106796" vertical-offset="459" max-vertical-offset="1496">
-          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="879" max-vertical-offset="1394">
+          <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/latlon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1564">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/navigation_object_manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37087378" vertical-offset="608" max-vertical-offset="1445">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>

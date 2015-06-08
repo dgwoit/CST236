@@ -57,15 +57,11 @@ class GPSSimulator(threading.Thread):
         lat_decimal_minutes = int(1000.0 * (lat_minutes - int(lat_minutes)))
         lat_minutes = int(lat_minutes)
         ns_mark = "N"
-        if self.position.lat < 0:
-            ns_mark = "S"
         lon_degrees = int(abs(self.position.lon))
         lon_minutes = 60.0 * (abs(self.position.lon) - lon_degrees)
         lon_decimal_minutes = int(1000.0 * (lon_minutes) - int(lon_minutes))
         lon_minutes = int(lon_minutes)
         ew_mark = "E"
-        if self.position.lon < 0:
-            ew_mark = "W"
         return "%03d%02d.%03d,%s,%03d%02d.%03d,%s" % (lat_degrees, lat_minutes, lat_decimal_minutes, ns_mark,
                                                    lon_degrees, lon_minutes, lon_decimal_minutes, ew_mark)
 
@@ -77,7 +73,5 @@ class GPSSimulator(threading.Thread):
 
     def nmea_magnetic_variation(self):
         abs_mag_var = abs(self.magnetic_variation)
-        ew_mark = "E"
-        if self.magnetic_variation < 0:
-            ew_mark = "W"
+        ew_mark = "W"
         return "%03.1f,%s" % (abs_mag_var, ew_mark)

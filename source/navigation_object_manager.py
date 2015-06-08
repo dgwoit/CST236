@@ -45,9 +45,6 @@ class NavigationObjectManager:
         self.tracks[track.id] = track
         return track
 
-    def remove_track(self, track):
-        del self.tracks[track.id]
-
     def encode(self):
         data = {}
         data["NavObjData"] = {"waypoints": self.encode_waypoints(), "routes": self.encode_routes(),\

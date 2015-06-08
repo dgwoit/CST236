@@ -41,15 +41,6 @@ class LatLon:
         q = 0
         if abs(delta_psi) > 10e-12:
             q = delta_phi/delta_psi
-        else:
-            q = math.cos(phi1) # E-W course becomes ill-conditioned with 0/0
-
-        # if delta_lambda over 180 degrees take shorter rhumb across anti-meridian:
-        if abs(delta_lambda) > math.pi:
-            if delta_lambda > 0:
-                delta_lambda = -(2*math.pi-delta_lambda)
-            else:
-                delta_lambda = (2*math.pi+delta_lambda)
 
         dist = math.sqrt(delta_phi*delta_phi + q*q*delta_lambda*delta_lambda) * R
         return dist
@@ -71,28 +62,6 @@ class LatLon:
         return d
         """
 
-    def bearing(self, dest_ll):
-        phi1 = math.radians(self.getLat())
-        phi2 = math.radians(dest_ll.getLat())
-        delta_phi = math.radians(dest_ll.getLat()-self.getLat())
-        delta_lambda = math.radians(dest_ll.getLon()-self.getLon())
-        delta_psi = math.log(math.tan(math.pi/4+phi2/2)/math.tan(math.pi/4+phi1/2))
-        q = 0
-        if abs(delta_psi) > 10e-12:
-            q = delta_phi/delta_psi
-        else:
-            q = math.cos(phi1)  # E-W course becomes ill-conditioned with 0/0
-
-        # if delta longitude over 180 degrees take shorter rhumb across anti-meridian:
-        if abs(delta_lambda) > math.pi:
-            if delta_lambda > 0:
-                delta_lambda = -(2*math.pi-delta_lambda)
-            else:
-                delta_lambda += 2*math.pi
-
-        brng = math.degrees(math.atan2(delta_lambda, delta_psi))
-        return brng
-
     def project(self, bearing, distance):
         R = 6371000  # metres
         delta = distance / R
@@ -105,16 +74,7 @@ class LatLon:
         q = 0
         if delta_psi > 10e-12:
             q = delta_phi / delta_psi
-        else:
-            q = math.cos(phi1) # E-W course becomes ill-conditioned with 0/0
         delta_lambda = delta*math.sin(theta)/q
-
-        # check if past the pole, normalise latitude if so
-        if (abs(phi2) > math.pi/2):
-            if phi2>0:
-                phi2 = math.pi-phi2
-            else:
-                phi2 = -math.pi-phi2
 
         lambda2 = (lambda1+delta_lambda+math.pi) % (2*math.pi) - math.pi
         return LatLon(math.degrees(phi2), math.degrees(lambda2))
