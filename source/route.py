@@ -1,5 +1,5 @@
 from waypoint import Waypoint
-from navigation_obect import NavigationObject
+from navigation_object import NavigationObject
 
 class Route(NavigationObject):
     def __init__(self, id, name):
