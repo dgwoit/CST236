@@ -5,5 +5,4 @@ sphinx
 docutils
 nose2-cov==1.0a4
 SendKeys
-pywinauto
 StringGenerator
