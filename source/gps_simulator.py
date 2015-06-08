@@ -22,7 +22,7 @@ class GPSSimulator(threading.Thread):
             time_elapsed = now-then
             then = now
             distance = self.speed_over_ground * time_elapsed
-            self.position = self.position.project(self.track_angle_true, time_elapsed)
+            self.position = self.position.project(self.track_angle_true, distance)
             self.emit_sentence(self.generate_rmc_sentence())
             self.emit_sentence(self.generate_gll_sentence())
 
