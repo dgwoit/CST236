@@ -32,7 +32,7 @@ class TestDeadReckoning(TestCase):
 
             mock.side_effect = sleepy
             dr.start()
-            waiter.wait()
+            waiter.wait(20.00)
             dr.stop()
         assert vessel.heading_true == 45, "HDT changed: {1} <> {2}".format(vessel.heading_true, 45)
         assert vessel.speed_over_ground == 23, "SOG changed: {1} <> {2}".format(vessel.speed_over_ground, 23)

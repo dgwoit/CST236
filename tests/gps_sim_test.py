@@ -26,7 +26,7 @@ class TestGPSSimulator(TestCase):
                 return TestGPSSimulator.gps_sentence
             mock.side_effect = my_generate_rmc
             self.simulator.start()
-            event.wait()
+            event.wait(10.00)
             self.simulator.stop()
             self.assert_valid_sentence(TestGPSSimulator.gps_sentence,
                                        "RMC,\d{6},[AV],\d+\.\d+,[NS],\d+\.\d+,[EW],\d+\.\d,\d+\.[0-9],\d{8},\d+.[0-9],[EW]"
@@ -45,7 +45,7 @@ class TestGPSSimulator(TestCase):
                 return TestGPSSimulator.gps_sentence
             mock.side_effect = my_generate_gll
             self.simulator.start()
-            event.wait()
+            event.wait(10.00)
             self.simulator.stop()
             self.assert_valid_sentence(TestGPSSimulator.gps_sentence,
                                        "GLL,\d+\.\d+,[NS],\d+\.\d+,[EW],[0-9]{6},[AV]"
