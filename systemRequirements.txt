@@ -1,0 +1,15 @@
+#0001 System simulates maritime vessel navigation
+#0002 System is able to perform dead reckoning
+#0003 Systen is able to perform route navigation using rhumb lines
+#0004 System provides a means of constructing waypoints
+#0005 System provides a means of constructing routes
+#0006 System provides a means to manage waypoints
+#0007 System provides a means to manage routes
+#0008 Serialization of system state information and navigation data
+#0009 System provides simulation of GPS navigation data
+#0010 System provides NMEA 0183 RMC sentence
+#0011 System provides NMEA 0183 GLL sentence
+#0012 System is able to parse NMEA 0183 RMC sentence
+#0013 System is able to parse NMEA 0183 RLL sentence
+#0014 System simulates rendering of data on cartographic display
+#0015 System shall record track points at a specified distance interval

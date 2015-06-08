@@ -22,7 +22,7 @@ def requirements(req_list):
 
     return wrapper
 
-with open('sharpTonaRequirements.txt') as f:
+with open('systemRequirements.txt') as f:
     for line in f.readlines():
         if '#00' in line:
             req_id, desc = line.split(' ', 1)
